@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegisterType;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,18 +16,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
 
-    /**
-     * @Route("/login", name="app_login")
-     */
+    #[Route("/login", name: "app_login")]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $user = new User();
-        $registerForm = $this->createForm(RegisterType::class, $user);
+        $registerForm = $this->createForm(RegisterType::class, $user, [
+            'action' => $this->generateUrl('app_register')]);
 
         //Redirect user to dashboard if already logged in
-         if ($this->getUser()) {
-             return $this->redirectToRoute('app_dashboard');
-         }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('app_dashboard');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -40,9 +39,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/register", name="app_register")
-     */
+    #[Route("/register", name: "app_register")]
     public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
         $user = new User();
@@ -54,16 +51,12 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
         }
-            return $this->redirectToRoute("app_login");
-        }
+        return $this->redirectToRoute("app_login");
+    }
 
-
-
-    /**
-     * @Route("/logout", name="app_logout")
-     */
+    #[Route("/logout", name: "app_logout")]
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
