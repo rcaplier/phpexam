@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un nouveau produit{% endblock %}
+
+{% block body %}
+    <h1 class="my-5">Ajouter un produit</h1>
+
+        {% form_theme addProductForm 'bootstrap_5_layout.html.twig' %}
+        {{ form_start(addProductForm)}}
+        <div class="form-group">
+            {{ form_label(addProductForm.name) }}
+            {{ form_widget(addProductForm.name) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(addProductForm.description) }}
+            {{ form_widget(addProductForm.description) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(addProductForm.price) }}
+            {{ form_widget(addProductForm.price) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(addProductForm.imgUrl) }}
+            {{ form_widget(addProductForm.imgUrl) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(addProductForm.onSell) }}
+            {{ form_widget(addProductForm.onSell) }}
+        </div>
+        {{ form_end(addProductForm) }}
+{% endblock %}

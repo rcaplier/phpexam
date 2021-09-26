@@ -7,7 +7,7 @@
     <a href="{{ path('app_add_product') }}"> + Ajouter un produit</a>
 
     {% if userProducts|length > 0 %}
-        <table class="my-3">
+        <table class="table my-3">
             <thead>
                 <tr>
                     <th>Nom de l'objet</th>
@@ -19,7 +19,7 @@
             <tbody>
             {% for product in userProducts %}
                 <tr>
-                    <td>{{ product.name }}</td>
+                    <td>{{ product.name }} <img class="img-fluid"  src="{{ asset(uploaded_img_dir ~ product.imgUrl ) }}" alt="{{ product.name }}" /></td>
                 </tr>
             {% endfor %}
             </tbody>

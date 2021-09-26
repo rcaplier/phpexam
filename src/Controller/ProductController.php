@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-    #[Route('/app/add_product', name: 'app_add_product')]
-    public function addProductView(): Response
+    #[Route('/product', name: 'addNewProduct')]
+    public function addNewProduct(): Response //TODO JSON RESPONSE
     {
         return $this->render('product/dashboard.html.twig', [
             'controller_name' => 'ProductController',
