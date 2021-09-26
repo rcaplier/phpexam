@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parcourir les produits{% endblock %}
+
+{% block body %}
+    <h1 class="my-5">Parcourir</h1>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-4">
+                <div class="card">
+                    <img src="{{ asset(uploaded_img_dir ~ product.imgUrl ) }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text">{{ product.price }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
