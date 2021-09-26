@@ -1,6 +1,8 @@
-<nav>
-{#    <a href="{{ path('register') }}">Register</a>#}
-{#    <a href="{{ path('users') }}">Users</a>#}
-{#    <a href="{{ path('posts') }}">Posts</a>#}
-{#    <a href="{{ path('post') }}">New post</a>#}
+{% if app.user %}
+<nav class="nav">
+    <a class="nav-link active" aria-current="page" href="{{ path('app_dashboard') }}">Accueil</a>
+    <a class="nav-link" href="{{ path('app_browse') }}">Parcourir</a>
+    <a class="nav-link" href="{{ path('app_settings') }}">Paramètres</a>
+    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
 </nav>
+{% endif %}

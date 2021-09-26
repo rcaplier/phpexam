@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+    <h1 class="h1 my-5">Accéder à mon compte</h1>
+
+    <div class="row">
+        <div class="col-6">
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+                <h4 class="mb-4">Connexion</h4>
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-4"
+                       autocomplete="email" required autofocus>
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control mb-4"
+                       autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <button class="btn btn-lg btn-primary my-3" type="submit">
+                    Connexion
+                </button>
+            </form>
+        </div>
+        <div class="col-6">
+            <form method="post">
+                <h4 class="mb-4">Créer mon compte</h4>
+                <label for="createFirstName">Prénom</label>
+                <input type="text" name="createFirstName" id="createFirstName" class="form-control mb-4">
+                <label for="createLastName">Nom</label>
+                <input type="text" name="createLastName" id="createLastName" class="form-control mb-4">
+                <label for="createEmail">Adresse e-mail</label>
+                <input type="email" value="{{ last_username }}" name="createEmail" id="createEmail" class="form-control mb-4"
+                       autocomplete="email" required autofocus>
+                <label for="createPassword">Mot de passe</label>
+                <input type="password" name="createPassword" id="createPassword" class="form-control mb-4"
+                       autocomplete="current-password" required>
+                <input type="checkbox" name="createCGU" id="createCGU">
+                <label for="createCGU" class=" mb-4">J'accepte les CGU</label><br>
+                <button class="btn btn-lg btn-primary my-3" type="submit">
+                    Creer mon compte
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    {#
+    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+    See https://symfony.com/doc/current/security/remember_me.html
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="_remember_me"> Remember me
+        </label>
+    </div>
+    #}
+
+
+{% endblock %}
