@@ -35,23 +35,45 @@
             </form>
         </div>
         <div class="col-6">
-            <form method="post">
-                <h4 class="mb-4">Créer mon compte</h4>
-                <label for="createFirstName">Prénom</label>
-                <input type="text" name="createFirstName" id="createFirstName" class="form-control mb-4">
-                <label for="createLastName">Nom</label>
-                <input type="text" name="createLastName" id="createLastName" class="form-control mb-4">
-                <label for="createEmail">Adresse e-mail</label>
-                <input type="email" value="{{ last_username }}" name="createEmail" id="createEmail" class="form-control mb-4"
-                       autocomplete="email" required autofocus>
-                <label for="createPassword">Mot de passe</label>
-                <input type="password" name="createPassword" id="createPassword" class="form-control mb-4"
-                       autocomplete="current-password" required>
-                <input type="checkbox" name="createCGU" id="createCGU">
-                <label for="createCGU" class=" mb-4">J'accepte les CGU</label><br>
-                <button class="btn btn-lg btn-primary my-3" type="submit">
-                    Creer mon compte
-                </button>
+            {# <form method="post" action="{{ path('register') }}"> #}
+            {# <h4 class="mb-4">Créer mon compte</h4> #}
+            {# <label for="createFirstName">Prénom</label> #}
+            {# <input type="text" name="createFirstName" id="createFirstName" class="form-control mb-4"> #}
+            {# <label for="createLastName">Nom</label> #}
+            {# <input type="text" name="createLastName" id="createLastName" class="form-control mb-4"> #}
+            {# <label for="createEmail">Adresse e-mail</label> #}
+            {# <input type="email" value="{{ last_username }}" name="createEmail" id="createEmail" class="form-control mb-4" #}
+            {# autocomplete="email" required autofocus> #}
+            {# <label for="createPassword">Mot de passe</label> #}
+            {# <input type="password" name="createPassword" id="createPassword" class="form-control mb-4" #}
+            {# autocomplete="current-password" required> #}
+            {# <input type="checkbox" name="createCGU" id="createCGU"> #}
+            {# <label for="createCGU" class=" mb-4">J'accepte les CGU</label><br> #}
+            {# <button class="btn btn-lg btn-primary my-3" type="submit"> #}
+            {# Creer mon compte #}
+            {# </button> #}
+            {# </form> #}
+
+            <form method="post" action="register">
+                {{ form_start(registerForm) }}
+                <div class="form-group">
+                    {{ form_label(registerForm.firstName) }}
+                    {{ form_widget(registerForm.firstName) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(registerForm.lastName) }}
+                    {{ form_widget(registerForm.lastName) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registerForm.email) }}
+                    {{ form_widget(registerForm.email) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(registerForm.password) }}
+                    {{ form_widget(registerForm.password) }}
+                </div>
+                {{ form_end(registerForm) }}
             </form>
         </div>
     </div>
