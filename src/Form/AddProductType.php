@@ -24,9 +24,6 @@ class AddProductType extends AbstractType
             ->add('price', MoneyType::class, [
                 'label' => 'Prix'
             ])
-//            ->add('createdAt', TextType::class, [
-//                'mapped' => false
-//            ])
             ->add('onSell', CheckboxType::class, [
                 'label' => 'Je ne veux pas mettre mon produit à la vente pour le moment',
                 'required' => false,
@@ -37,7 +34,6 @@ class AddProductType extends AbstractType
             ->add('imgUrl', FileType::class, [
                 'label' => 'Fichier image'
             ])
-//            ->add('owner')
             ->add('save', SubmitType::class, [
                 'label' => 'Ajouter le produit'
             ]);

@@ -85,6 +85,7 @@ class ApplicationController extends AbstractController
             }
             $product->setCreatedAt(new DateTime());
             $product->setOwner($user);
+            $product->setOnSell(!$product->getOnSell());
             $this->entityManager->persist($product);
             $this->entityManager->flush();
         } else {
@@ -93,18 +94,44 @@ class ApplicationController extends AbstractController
         return $this->redirectToRoute("app_dashboard");
     }
 
+    //Là j'ai fais deux fonctions parceque j'avais envie d'écrire mais j'aurais pu en faire juste une qui toggle le boolean
+    #[Route('/app/unsell', name: 'app_unsell')]
+    public function unsellProduct(Request $request): Response
+    {
+        $product = new Product();
+        $product = $this->productRepository->find($request->get("idProd"));
+        $product->setOnSell(false);
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
+        return $this->redirectToRoute("app_dashboard");
+    }
+
+    #[Route('/app/sell', name: 'app_sell')]
+    public function sellProduct(Request $request): Response
+    {
+        $product = new Product();
+        $product = $this->productRepository->find($request->get("idProd"));
+        $product->setOnSell(true);
+        $this->entityManager->persist($product);
+        $this->entityManager->flush();
+        return $this->redirectToRoute("app_dashboard");
+    }
+
     #[Route('/app/browse', name: 'app_browse')]
     public function browse(): Response
     {
-        return $this->render('application/dashboard.html.twig', [
-            'controller_name' => 'DashboardController',
+
+        $products = $this->productRepository->findBy(['onSell' => true]);
+
+        return $this->render('application/browse.html.twig', [
+            'products' => $products,
         ]);
     }
 
     #[Route('/app/settings', name: 'app_settings')]
     public function settings(): Response
     {
-        return $this->render('application/dashboard.html.twig', [
+        return $this->render('application/settings.html.twig', [
             'controller_name' => 'DashboardController',
         ]);
     }
