@@ -1,4 +1,4 @@
-# human Booster CDA Symfony test 2021
+# Human Booster CDA Symfony test 2021
 
 This is the symfony test we had to do. In order to run the project, just follow the few steps below :
 
